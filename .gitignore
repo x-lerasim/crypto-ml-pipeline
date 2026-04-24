@@ -8,11 +8,13 @@ project/project/
 .bloop/
 *.iml
 *.log
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
 
-# generated data
 data/*
 !data/.gitkeep
 
-# OS
 .DS_Store
 Thumbs.db

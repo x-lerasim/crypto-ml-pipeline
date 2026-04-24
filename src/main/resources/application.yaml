@@ -1,0 +1,29 @@
+cryptoml:
+  api:
+    base-url: "https://api.coincap.io/v2"
+    asset: "bitcoin"
+    interval: "d1"
+    history-days: 365
+    timeout-ms: 30000
+  spark:
+    app-name: "crypto-ml-pipeline"
+    master: "local[*]"
+    shuffle-partitions: 8
+  features:
+    sma-windows: [7, 30]
+    rsi-period: 14
+    lag-periods: [1, 2, 3, 4, 5, 6, 7]
+    volatility-window: 14
+  model:
+    train-fraction: 0.8
+    label-col: "label"
+    cv-folds: 3
+    lr:
+      reg-param: [0.01, 0.1]
+      elastic-net-param: [0.0, 0.5]
+    gbt:
+      max-depth: [3, 5]
+      max-iter: [20, 50]
+  output:
+    metrics-path: "data/metrics.json"
+    features-path: "data/features.parquet"
